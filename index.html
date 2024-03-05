@@ -52,16 +52,19 @@
       const searchBox = document.querySelector(".search input");
       const searchButton = document.querySelector(".search button");
       const weatherIcon = document.querySelector(".weather-icon");
+      const weatherBackground = document.querySelector(".card");
 
       async function checkWeather(city) {
         const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-
+        
         if (response.status == 404) {
           document.querySelector(".weather").classList.remove("active");
           document.querySelector(".error").classList.remove("none");
           document.querySelector(".error").classList.add("active");
         } else {
           let data = await response.json();
+
+          console.log(data);
 
           document.querySelector(".temperature").textContent = `${Math.round(
             data.main.temp
@@ -76,6 +79,20 @@
 
           weatherIcon.src =
             "images/" + data.weather[0].main.toLowerCase() + ".png";
+
+          if (data.weather[0].main.toLowerCase() == "drizzle") {
+            weatherBackground.style.background = "linear-gradient(135deg, #5E7A8A, #A6BEC7)";
+          } else if (data.weather[0].main.toLowerCase() == "clouds") {
+            weatherBackground.style.background = "linear-gradient(135deg, #5493B2, #A6BEC7)";
+          } else if (data.weather[0].main.toLowerCase() == "mist") {
+            weatherBackground.style.background = "linear-gradient(135deg, #B98EB6, #5E5D8D)";
+          } else if (data.weather[0].main.toLowerCase() == "rain") {
+            weatherBackground.style.background = "linear-gradient(135deg, #36454e, #A6BEC7)";
+          } else if (data.weather[0].main.toLowerCase() == "snow") {
+            weatherBackground.style.background = "linear-gradient(135deg, #757C8A, #ACB7BD)";
+          } else {
+            weatherBackground.style.background = "linear-gradient(135deg, #52A4DA, #74B9DE)";
+          }
 
           document.querySelector(".weather").classList.add("active");
           document.querySelector(".error").classList.add("none");
