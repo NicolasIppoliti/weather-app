@@ -124,7 +124,10 @@
         } else if (data.weather[0].main.toLowerCase() == "snow") {
           weatherBackground.style.background =
             "linear-gradient(135deg, #757C8A, #ACB7BD)";
-        } else {
+        } else if (data.weather[0].main.toLowerCase() == "haze") {
+          weatherBackground.style.background =
+            "linear-gradient(135deg, #B98EB6, #5E5D8D)";
+        } else if (data.weather[0].main.toLowerCase() == "clear") {
           weatherBackground.style.background =
             "linear-gradient(135deg, #52A4DA, #74B9DE)";
         }
